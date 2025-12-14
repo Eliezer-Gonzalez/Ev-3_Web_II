@@ -13,27 +13,27 @@ public class PracticaService {
     @Autowired
     private PracticaRepository practicaRepository;
 
-    // create
+    // Guardar una nueva práctica en la BD
     public Practica crearPractica(Practica practica) {
         return practicaRepository.save(practica);
     }
 
-    // get all
+    // Traer todas las prácticas sin filtros
     public List<Practica> obtenerTodasLasPracticas() {
         return practicaRepository.findAll();
     }
 
-    // get(id)
+    // Buscar una práctica específica por su ID
     public Optional<Practica> obtenerPracticaPorId(String id) {
         return practicaRepository.findById(id);
     }
 
-    // get (estudiante nombre completo)
+    // Filtrar prácticas por el nombre completo del estudiante
     public List<Practica> obtenerPracticasPorEstudiante(String nombreCompleto) {
         return practicaRepository.findByEstudianteNombreCompleto(nombreCompleto);
     }
     
-    // update
+    // Actualizar datos de una práctica que ya existe
     public Optional<Practica> actualizarPractica(String id, Practica practicaActualizada) {
         return practicaRepository.findById(id)
             .map(practica -> {
@@ -48,7 +48,7 @@ public class PracticaService {
             });
     }
     
-    // delete
+    // Eliminar práctica si existe, devuelve true si se borró - false si no se encontró xd
     public boolean eliminarPractica(String id) {
         if (practicaRepository.existsById(id)) {
             practicaRepository.deleteById(id);

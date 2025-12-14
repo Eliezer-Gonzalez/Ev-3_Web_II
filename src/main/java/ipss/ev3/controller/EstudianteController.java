@@ -17,10 +17,8 @@ public class EstudianteController {
     @Autowired
     private PracticaService practicaService;
     
-    /**
-     * POST /api/estudiantes/practicas
-     * Crear una nueva práctica (estudiante)
-     */
+    // Endpoint para que el estudiante cree su práctica
+    // Aquí valido los datos y si está todo ok lo guardo en la BD
     @PostMapping("/practicas")
     public ResponseEntity<?> crearPractica(@Valid @RequestBody Practica practica) {
         try {
@@ -33,10 +31,8 @@ public class EstudianteController {
         }
     }
 
-    /**
-     * GET /api/estudiantes/practicas/{nombreCompleto}
-     * Listar prácticas del estudiante por nombre completo
-     */
+    // Buscar las prácticas por nombre del estudiante
+    // Uso el nombre completo como filtro para traer sus prácticas
     @GetMapping("/practicas/{nombreCompleto}")
     public ResponseEntity<?> obtenerPracticasPorEstudiante(@PathVariable String nombreCompleto) {
         try {

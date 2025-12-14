@@ -17,10 +17,8 @@ public class ProfesorController {
     @Autowired
     private PracticaService practicaService;
     
-    /**
-     * POST /api/profesores/practicas
-     * Crear una nueva práctica (profesor)
-     */
+    // Endpoint para que el profe cree una práctica
+    // Similar al del estudiante pero con otra ruta
     @PostMapping("/practicas")
     public ResponseEntity<?> crearPractica(@Valid @RequestBody Practica practica) {
         try {
@@ -33,10 +31,8 @@ public class ProfesorController {
         }
     }
     
-    /**
-     * GET /api/profesores/practicas
-     * Listar todas las prácticas
-     */
+    // El profe puede ver TODAS las prácticas de todos los estudiantes
+    // Esto es útil para revisar el estado de las prácticas
     @GetMapping("/practicas")
     public ResponseEntity<?> obtenerTodasLasPracticas() {
         try {
@@ -46,17 +42,15 @@ public class ProfesorController {
                     .body(Map.of("mensaje", "No hay prácticas registradas en el sistema"));
             }
             return ResponseEntity.ok(
-                Map.of("mensaje", "Se encontraron " + practicas.size() + " práctica(s)", "data", practicas));
+                Map.of("mensaje", "Se encontro " + practicas.size() + " práctica(s)", "data", practicas));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Map.of("mensaje", "Error al obtener las prácticas: " + e.getMessage()));
         }
     }
     
-    /**
-     * PUT /api/profesores/practicas/{id}
-     * Actualizar una práctica existente
-     */
+    // Actualizar info de una práctica ya creada
+    // Solo el profe puede hacer esto, el estudiante NO
     @PutMapping("/practicas/{id}")
     public ResponseEntity<?> actualizarPractica(@PathVariable String id, @Valid @RequestBody Practica practica) {
         try {
@@ -71,10 +65,8 @@ public class ProfesorController {
         }
     }
     
-    /**
-     * DELETE /api/profesores/practicas/{id}
-     * Eliminar una práctica
-     */
+    // Borrar una práctica de la BD
+    // También solo el profe puede eliminar prácticas
     @DeleteMapping("/practicas/{id}")
     public ResponseEntity<?> eliminarPractica(@PathVariable String id) {
         try {
